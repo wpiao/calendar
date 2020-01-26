@@ -1,0 +1,77 @@
+
+State = {
+	currentMonth: 
+	currentYear:
+	days: function(low, end) {
+		var list = [];
+		for (var i = lowEnd; i <= highEnd; i++) {
+    		list.push(i);
+    	return list;
+    	} 
+	}
+}
+
+
+Date Object
+
+
+
+1. current date ( when program first starts)
+	- day       new Date().getDate()
+	- month 	new Date().getMonth() + 1 		(since Jan is a 0 date)
+	- year 		new Date().getFullYear()
+
+2. when enter month and year
+	=> figure out how many days in that month
+
+
+	if right arrow press
+		if(this.state.currentMonth === 12) {
+			this.state.currentMonth === 1;
+			this.state.currentYear += 1
+		} else {
+			this.state.currentMonth += 1;
+		}
+
+	var getDaysInMonth = function(month, year) {
+		return new Date(year, month, 0).getDate();
+	};
+	
+
+Placement Alg:
+
+Figure out where 1 day of each month start:
+
+	grid-column: 
+		new Date(year, month, day)
+
+		Ex:
+			January 1st, 2020
+
+			new Date(2020, 0, 1).getDay();
+			
+				return index of day [0 - 6] = [sun - sat]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
