@@ -95,7 +95,10 @@ Hovering
 
 	2. Hover
 
-		
+		onMouseEnter={() => this.onHoverListItem(true)}
+        onMouseLeave={() => this.onHoverListItem(false)}
+
+
 
 		if: the element that is hovered
 			- call a function from App

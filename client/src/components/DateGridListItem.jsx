@@ -13,17 +13,13 @@ class DateGridListItem extends React.Component {
 
             colorButtonDarkGreen: false,
             hoverColor: false
-            //firstSelectedDate: ''
         };
 
         this.clickHandler = this.clickHandler.bind(this);
         this.firstGridColumn = this.firstGridColumn.bind(this);
         this.changeColor = this.changeColor.bind(this);
         this.hoverOver = this.hoverOver.bind(this);
-        //this.hoverColor = this.hoverColor.bind(this);
     }
-
-    
 
     prependZero(number) { 
         if (number < 10) 
@@ -37,16 +33,7 @@ class DateGridListItem extends React.Component {
         this.props.mouseEnter(dateTime);
     }
 
-    // hoverColor(hover) {
-    //     if(hover) {
-    //         this.setState({
-    //             hoverColor: true
-    //         })
-    //     }
-    // }
-
     clickHandler(dateTime) {
-        //console.log('event', event.target);
         console.log('ListItem', dateTime);
         this.props.updateStartEndDate(dateTime);
 
@@ -81,16 +68,18 @@ class DateGridListItem extends React.Component {
             style['color'] = 'white';
         }
 
-        //console.log(this.state.)
+        // hovering
         if(!this.state.colorButtonDarkGreen && this.props.hoverColor){
             style['backgroundColor'] = '#A3F0EA';
+            style['border'] = 'solid #80E8E0 0.3px';
+            //style['border-color'] = 'black'
             style['color'] = 'white'; 
         }
 
-        console.log(this.props.lastFillDate)
         if(!this.state.colorButtonDarkGreen && this.props.hoverColor
             && this.props.lastFillDate){
             style['backgroundColor'] = '#00A699';
+            style['border'] = '0';
             style['color'] = 'white';
         }
 

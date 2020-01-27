@@ -73,8 +73,6 @@ main {
   font-size: 0.65em;
   color: #757575;
   font-weight: 400;
-  /* letter-spacing: 0.07em; */
-  /* font-variant: small-caps; */
   text-align: center;
 }
 
@@ -97,7 +95,7 @@ main {
   height: 4.7ch;
   /* border-radius: 50%; */
   background-color: transparent;
-  color:#484848;
+  /* color:#484848; */
   font-size: 0.75em;
   font-weight: 700;
 }
@@ -115,11 +113,48 @@ main {
   color: white;
 }
 
+
+#clear-date-empty {
+  /* width: 55%; */
+  /* float: left */
+  width: 70%;
+  display: inline-block;
+}
+
 #clear-date {
   color: #248489;
   text-align: right;
   font-size: 80%;
   letter-spacing: 0;
-  margin-block-start: 0.8em;
-  margin-block-end: 0.7em;
+  /* margin-block-start: 0.8em;
+  margin-block-end: 0.7em; */
+  width: 27%;
+  display: inline-block;
+}
+
+#month-container {
+  height: 1.3em;
+}
+
+/* .transition {
+  width: 6ch;
+  height: 4.7ch; 
+  border-radius: 3px;
+} */
+
+#prev-button {
+  float: left
+}
+
+#next-button {
+  float: right
+}
+
+.svg {
+  border: 1px solid #E4E7E7;
+  border-radius: 3px;
+  /* width: 8%;
+  height: 12%; */
+  width: 2.2em;
+  height: 1.8em;
 }

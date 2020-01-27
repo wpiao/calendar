@@ -18,7 +18,11 @@ module.exports = {
         use: {
           loader: "babel-loader"
         }
-      } 
+      },
+      {
+        test: /\.svg$/,
+        loader: "svg-inline-loader"
+      }
     ]
   }
 };

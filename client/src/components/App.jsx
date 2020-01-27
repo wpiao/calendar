@@ -14,19 +14,6 @@ class App extends Component {
       'June', 'July', 'August', 'September',
       'October', 'November', 'December'
       ];
-
-    var daysArray = function(low, end) {
-      var list = [];
-      for (var i = low; i <= end; i++) 
-          list.push(i);
-
-      return list;
-    }
-
-    var getDaysInMonth = function(month, year) {
-      console.log(new Date(year, month, 0).getDate());
-      return new Date(year, month, 0).getDate();
-    };
     
     var date = new Date();
     date = new Date(2020, 3, 5);
@@ -35,13 +22,12 @@ class App extends Component {
     var month = monthConversion[date.getMonth()];
     var year = date.getFullYear();
 
-
     this.state = {
         monthNumber: monthNumber,
         
         month: month,
         year: year,
-        days: daysArray(1, getDaysInMonth(monthNumber, year)),
+        days: this.daysArray(1, this.getDaysInMonth(monthNumber, year)),
 
         hoverDate: '',
         startDate: '',
@@ -52,24 +38,32 @@ class App extends Component {
     this.mouseEnter = this.mouseEnter.bind(this);
   }
 
+  daysArray(low, end) {
+    var list = [];
+    for (var i = low; i <= end; i++) 
+        list.push(i);
+
+    return list;
+  }
+
+  getDaysInMonth(month, year) {
+    console.log(new Date(year, month, 0).getDate());
+    return new Date(year, month, 0).getDate();
+  };
+
+
   buttonCLick(dateTime) {
     if(!this.state.startDate) {
       var date = 'startDate';
     } else {
       var date = 'endDate';
     } 
-
-    if(this.state.startDate && this.state.endDate){
-      console.log('both has been updated');
-    }
-    //console.log('inside App', dateTime);
     this.setState({
       [date]: dateTime 
     })
   }
 
   mouseEnter(dateTime) {
-    //console.log('inside App mouseEnter', dateTime);
     let firstDay = Number(this.state.startDate.slice(-2));
     let hoverDay  =  Number(dateTime.slice(-2));
 
@@ -77,7 +71,6 @@ class App extends Component {
       return;
     }
 
-    // console.log('h , f', hoverDay,  firstDay)
     if(this.state.startDate && (hoverDay > firstDay)){
       this.setState({
         hoverDate: dateTime 
@@ -103,10 +96,6 @@ class App extends Component {
       } else {
         endDay = Number(this.state.hoverDate.slice(-2));
       }
-
-      //console.log('here are first and last');
-      //console.log(firstDay, endDay);
-      //console.log(this.listBetweenTwoNumbers(firstDay+1, endDay));
       return this.listBetweenTwoNumbers(firstDay+1, endDay);
     }
     return [];
