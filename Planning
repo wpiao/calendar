@@ -49,8 +49,78 @@ Figure out where 1 day of each month start:
 			January 1st, 2020
 
 			new Date(2020, 0, 1).getDay();
-			
+
 				return index of day [0 - 6] = [sun - sat]
+
+
+
+
+When click first Date
+	
+	1. record first date
+	2. ever time we hover over button greater than current button
+		highlight all previous buttons
+	3. 
+
+//--------------------------------------------------------------------------
+
+
+In App.js
+
+	add startDay and endDay to this.state
+		initialize as empty strings ("")
+
+		pass a function from App down to DateGridListItem
+		so when a button gets clicked, it invokes the function from 
+		App to update the state of App.js
+
+
+Note to ask TA:
+	ask about dateTime in DateGridListItem
+
+
+Hovering
+
+	0. 
+		this.state = {
+			startDate : '',
+			hoverDate : ''
+		}
+
+	1. Click start button
+		- setState
+			this.state = {
+				startDate: ...
+			}
+
+	2. Hover
+
+		
+
+		if: the element that is hovered
+			- call a function from App
+				to setStatee = {
+					hoverDate = ...
+				}
+
+			let app take care of all other element in range
+
+
+		else: 
+
+
+			
+
+
+
+
+
+
+
+
+
+
+	
 
 
 

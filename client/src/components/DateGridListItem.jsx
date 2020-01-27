@@ -4,17 +4,26 @@ class DateGridListItem extends React.Component {
     constructor(props) {
         super(props);
 
+        console.log('color', this.props.hoverColor);
+
         this.state = {
             day: this.props.day,
             month: this.props.monthYear.month,
             year: this.props.monthYear.year,
 
-            firstSelectedDate: ''
+            colorButtonDarkGreen: false,
+            hoverColor: false
+            //firstSelectedDate: ''
         };
 
         this.clickHandler = this.clickHandler.bind(this);
         this.firstGridColumn = this.firstGridColumn.bind(this);
+        this.changeColor = this.changeColor.bind(this);
+        this.hoverOver = this.hoverOver.bind(this);
+        //this.hoverColor = this.hoverColor.bind(this);
     }
+
+    
 
     prependZero(number) { 
         if (number < 10) 
@@ -23,9 +32,33 @@ class DateGridListItem extends React.Component {
             return number.toString(); 
     }
 
-    clickHandler(event) {
-        console.log(event.target.dateTime);
+    hoverOver(dateTime) {
+        // send just the hover item back ??
+        this.props.mouseEnter(dateTime);
+    }
+
+    // hoverColor(hover) {
+    //     if(hover) {
+    //         this.setState({
+    //             hoverColor: true
+    //         })
+    //     }
+    // }
+
+    clickHandler(dateTime) {
+        //console.log('event', event.target);
+        console.log('ListItem', dateTime);
+        this.props.updateStartEndDate(dateTime);
+
+        this.changeColor();
+        //console.log(event.target.dateTime);
         // need to save this later.
+    }
+
+    changeColor() {
+        this.setState({
+            colorButtonDarkGreen: true
+        })
     }
 
     firstGridColumn(day) {
@@ -39,12 +72,30 @@ class DateGridListItem extends React.Component {
         let month = this.prependZero(this.state.month);
         let day = this.prependZero(this.state.day);
         let dateTime = `${this.state.year}-${month}-${day}`;
+        //this.hoverColor(this.props.hoverColor);
 
-        let gridColumnValue = this.firstGridColumn(this.state.day);
+
+        
+        
+        let style = {};
+        style['gridColumn'] = this.firstGridColumn(this.state.day);
+        if(this.state.colorButtonDarkGreen){
+            style['backgroundColor'] = '#019C8E';
+            style['color'] = 'white';
+        }
+
+        //console.log(this.state.)
+        if(!this.state.colorButtonDarkGreen && this.props.hoverColor){
+            style['backgroundColor'] = '#A3F0EA';
+            style['color'] = 'white'; 
+        }
+
         return (
+            // note come back to dateTime and ask a TA
             <button 
-                onClick={this.clickHandler} 
-                style={{"gridColumn": gridColumnValue}}>
+                style={style}
+                onMouseEnter={() => {this.hoverOver(dateTime)}}
+                onClick={() => {this.clickHandler(dateTime)}}>
                     <time dateTime={dateTime}>{this.state.day}</time>
             </button>
         );

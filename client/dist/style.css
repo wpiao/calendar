@@ -25,6 +25,10 @@
 
 html {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  /* font-family: "../../Font_Cereal/AirbnbCereal-Medium.ttf"; */
+  font-family: 'MontrealRegular';
+  /* font-weight: normal; */
+  /* font-style: normal; */
   font-size: 125%;
   line-height: 1.4;
   font-weight: 400;
@@ -103,6 +107,6 @@ main {
 
 .date-grid button:active,
 .date-grid button.is-selected {
-  background-color: var(--teal-100);
+  background-color: var(--teal-600);
   color: white;
 }

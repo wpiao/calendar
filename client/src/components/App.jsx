@@ -28,7 +28,7 @@ class App extends Component {
     };
     
     var date = new Date();
-    date = new Date(2020, 11, 16);
+    date = new Date(2020, 3, 5);
 
     var monthNumber = date.getMonth() + 1
     var month = monthConversion[date.getMonth()];
@@ -40,13 +40,73 @@ class App extends Component {
         
         month: month,
         year: year,
-        days: daysArray(1, getDaysInMonth(monthNumber, year))
+        days: daysArray(1, getDaysInMonth(monthNumber, year)),
+
+        hoverDate: '',
+        startDate: '',
+        endDate: ''
     };
-}
+
+    this.buttonCLick = this.buttonCLick.bind(this);
+    this.mouseEnter = this.mouseEnter.bind(this);
+  }
+
+  buttonCLick(dateTime) {
+    if(!this.state.startDate) {
+      var date = 'startDate';
+    } else {
+      var date = 'endDate';
+    } 
+
+    if(this.state.startDate && this.state.endDate){
+      console.log('both has been updated');
+    }
+    //console.log('inside App', dateTime);
+    this.setState({
+      [date]: dateTime 
+    })
+  }
+
+  mouseEnter(dateTime) {
+    //console.log('inside App mouseEnter', dateTime);
+    let firstDay = Number(this.state.startDate.slice(-2));
+    let hoverDay  =  Number(dateTime.slice(-2));
+
+    // console.log('h , f', hoverDay,  firstDay)
+    if(this.state.startDate && (hoverDay > firstDay)){
+      this.setState({
+        hoverDate: dateTime 
+      })
+    }
+  }
+
+  listBetweenTwoNumbers(low, end) {
+    var list = [];
+    for (var i = low; i <= end; i++) 
+        list.push(i);
+
+    return list;
+  }
+
+  hoveringDates() {
+    if(this.state.startDate) {
+      let firstDay = Number(this.state.startDate.slice(-2));
+      let endDay  =  Number(this.state.hoverDate.slice(-2));
+
+      //console.log('here are first and last');
+      //console.log(firstDay, endDay);
+      //console.log(this.listBetweenTwoNumbers(firstDay+1, endDay));
+      return this.listBetweenTwoNumbers(firstDay+1, endDay);
+    }
+    return [];
+  }
+
 
   render() {
     let monthYear = {month: this.state.monthNumber, year: this.state.year};
+    let listOfHoverDates = this.hoveringDates();
 
+    //console.log('rendering', this.state)
     return (
     <main>
       <div className="calendar">
@@ -54,7 +114,10 @@ class App extends Component {
         <DayOfWeek />
         <DateGridList 
           monthYear={monthYear}
-          days={this.state.days}/>
+          days={this.state.days}
+          updateStartEndDate={this.buttonCLick}
+          mouseEnter={this.mouseEnter}
+          listOfHoverDates={listOfHoverDates}/>
       </div>
     </main>
     );
