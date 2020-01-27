@@ -5,8 +5,8 @@ var DateGridList = (props) => {
 
     // props.array= [7,8,9,...23]
     //hoverHighlight={true}
-    console.log(props.listOfHoverDates);
-    var hoverDates = props.listOfHoverDates;
+    console.log(props.listOfColorDates);
+    var hoverDates = props.listOfColorDates;
 
 
     return (
@@ -26,7 +26,8 @@ var DateGridList = (props) => {
                     hoverColor={hoverColor}
                     monthYear={props.monthYear}
                     updateStartEndDate={props.updateStartEndDate}
-                    mouseEnter={props.mouseEnter}/>)
+                    mouseEnter={props.mouseEnter}
+                    lastFillDate={props.lastFillDate}/>)
             })}
         </div>
     );

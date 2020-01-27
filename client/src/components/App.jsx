@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MonthIndicator from './MonthIndicator.jsx';
 import DayOfWeek from './DayOfWeek.jsx';
 import DateGridList from './DateGridList.jsx';
+import ClearDate  from './ClearDate.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -72,6 +73,10 @@ class App extends Component {
     let firstDay = Number(this.state.startDate.slice(-2));
     let hoverDay  =  Number(dateTime.slice(-2));
 
+    if(this.state.startDate && this.state.endDate){
+      return;
+    }
+
     // console.log('h , f', hoverDay,  firstDay)
     if(this.state.startDate && (hoverDay > firstDay)){
       this.setState({
@@ -88,10 +93,16 @@ class App extends Component {
     return list;
   }
 
-  hoveringDates() {
+  colorDates() {
     if(this.state.startDate) {
       let firstDay = Number(this.state.startDate.slice(-2));
-      let endDay  =  Number(this.state.hoverDate.slice(-2));
+
+      let endDay;
+      if(this.state.endDate){
+        endDay = Number(this.state.endDate.slice(-2));
+      } else {
+        endDay = Number(this.state.hoverDate.slice(-2));
+      }
 
       //console.log('here are first and last');
       //console.log(firstDay, endDay);
@@ -104,7 +115,11 @@ class App extends Component {
 
   render() {
     let monthYear = {month: this.state.monthNumber, year: this.state.year};
-    let listOfHoverDates = this.hoveringDates();
+    let listOfColorDates = this.colorDates();
+    let lastFillDate = Boolean(this.state.endDate) === true;
+    let hide = Boolean(this.state.startDate);
+    console.log('app', this.state.endDate);
+    console.log('last', lastFillDate);
 
     //console.log('rendering', this.state)
     return (
@@ -117,7 +132,9 @@ class App extends Component {
           days={this.state.days}
           updateStartEndDate={this.buttonCLick}
           mouseEnter={this.mouseEnter}
-          listOfHoverDates={listOfHoverDates}/>
+          listOfColorDates={listOfColorDates}
+          lastFillDate={lastFillDate}/>
+        <ClearDate hide={hide}/>
       </div>
     </main>
     );

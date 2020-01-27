@@ -31,8 +31,8 @@ html {
   /* font-style: normal; */
   font-size: 125%;
   line-height: 1.4;
-  font-weight: 400;
-  color: var(--blue-grey-900);
+  
+  /* color:#484848; */
 }
 
 body {
@@ -45,15 +45,16 @@ main {
   margin: 3em auto 0 auto;
   padding: 1.5em;
   background-color: #fff;
-  border: 2px solid var(--blue-grey-200);
+  border: 1px solid #E4E4E4;
   border-radius: 8px;
 }
 
 /* // For the month */
 .month-indicator {
-  color: var(--blue-grey-700);
+  color:#484848;
   text-align: center;
-  font-weight: 500;
+  font-weight: 750;
+  letter-spacing: 0.0em;
 }
 
 /* // CSS grid used for the dates */
@@ -69,11 +70,11 @@ main {
 }
 
 .day-of-week > * {
-  font-size: 0.7em;
-  color: var(--blue-grey-400);
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  font-variant: small-caps;
+  font-size: 0.65em;
+  color: #757575;
+  font-weight: 400;
+  /* letter-spacing: 0.07em; */
+  /* font-variant: small-caps; */
   text-align: center;
 }
 
@@ -90,12 +91,15 @@ main {
 /* // Style for each day */
 .date-grid button {
   position: relative;
+  /* border: 0.5px solid #767676; */
   border: 0;
-  width: 4.5ch;
-  height: 4.5ch;
+  width: 4.7ch;
+  height: 4.7ch;
   /* border-radius: 50%; */
   background-color: transparent;
-  color: var(--blue-grey-600);
+  color:#484848;
+  font-size: 0.75em;
+  font-weight: 700;
 }
 
 .date-grid button:hover,
@@ -109,4 +113,13 @@ main {
 .date-grid button.is-selected {
   background-color: var(--teal-600);
   color: white;
+}
+
+#clear-date {
+  color: #248489;
+  text-align: right;
+  font-size: 80%;
+  letter-spacing: 0;
+  margin-block-start: 0.8em;
+  margin-block-end: 0.7em;
 }

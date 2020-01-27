@@ -74,13 +74,10 @@ class DateGridListItem extends React.Component {
         let dateTime = `${this.state.year}-${month}-${day}`;
         //this.hoverColor(this.props.hoverColor);
 
-
-        
-        
         let style = {};
         style['gridColumn'] = this.firstGridColumn(this.state.day);
         if(this.state.colorButtonDarkGreen){
-            style['backgroundColor'] = '#019C8E';
+            style['backgroundColor'] = '#00A699';
             style['color'] = 'white';
         }
 
@@ -89,6 +86,14 @@ class DateGridListItem extends React.Component {
             style['backgroundColor'] = '#A3F0EA';
             style['color'] = 'white'; 
         }
+
+        console.log(this.props.lastFillDate)
+        if(!this.state.colorButtonDarkGreen && this.props.hoverColor
+            && this.props.lastFillDate){
+            style['backgroundColor'] = '#00A699';
+            style['color'] = 'white';
+        }
+
 
         return (
             // note come back to dateTime and ask a TA
