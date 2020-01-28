@@ -8,13 +8,17 @@ class MonthIndicator extends React.Component {
         super(props);
         
         this.state = { 
-            month: this.props.month,
-            year: this.props.year,
+            // month: this.props.month,
+            // year: this.props.year,
             mousePrev: false,
             mouseNext: false
         };
         this.mousePrev = this.mousePrev.bind(this);
         this.mouseNext = this.mouseNext.bind(this);
+    }
+
+    updating(typeMonth) {
+        this.props.updateDateMonth(typeMonth);
     }
 
     mousePrev() {
@@ -31,13 +35,15 @@ class MonthIndicator extends React.Component {
 
     styling(mouseState) {
         if(mouseState){
-            return {'border-color': '#C4C4C4'};
+            return {'borderColor': '#C4C4C4'};
         } else {
-            return {'border-color': '#E4E7E7'};
+            return {'borderColor': '#E4E7E7'};
         }
     }
 
     render() {
+        // console.log(this.state.month);
+        // console.log(this.state.year);
     
         let stylePrev = this.styling(this.state.mousePrev);
         let styleRight = this.styling(this.state.mouseNext);
@@ -50,12 +56,10 @@ class MonthIndicator extends React.Component {
                     style={stylePrev}
                     onMouseEnter={this.mousePrev} 
                     onMouseLeave={this.mousePrev}
-                    onClick={() => {
-                    console.log("hi  svg");
-                    }}
+                    onClick={() => {this.updating('prevMonth')}}
                  />
                 <time> 
-                    {this.state.month} {this.state.year} 
+                    {this.props.month} {this.props.year} 
                 </time>
                 <SVG
                     id="next-button" className="transition svg"
@@ -63,9 +67,7 @@ class MonthIndicator extends React.Component {
                     style={styleRight}
                     onMouseEnter={this.mouseNext} 
                     onMouseLeave={this.mouseNext}
-                    onClick={() => {
-                    console.log("hi  svg");
-                    }}
+                    onClick={() => {this.updating('nextMonth')}}
                  />
             </div>
         </div>

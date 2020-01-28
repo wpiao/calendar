@@ -50,19 +50,19 @@ class DateGridListItem extends React.Component {
 
     firstGridColumn(day) {
         if(day === 1){
-            return new Date(this.state.year, this.state.month-1, this.state.day).getDay() + 1;
+            return new Date(this.props.monthYear.year, this.props.monthYear.month-1, this.props.day).getDay() + 1;
         }
         return null;
     } 
 
     render() {
-        let month = this.prependZero(this.state.month);
-        let day = this.prependZero(this.state.day);
-        let dateTime = `${this.state.year}-${month}-${day}`;
+        let month = this.prependZero(this.props.monthYear.month);
+        let day = this.prependZero(this.props.day);
+        let dateTime = `${this.props.monthYear.year}-${month}-${day}`;
         //this.hoverColor(this.props.hoverColor);
 
         let style = {};
-        style['gridColumn'] = this.firstGridColumn(this.state.day);
+        style['gridColumn'] = this.firstGridColumn(this.props.day);
         if(this.state.colorButtonDarkGreen){
             style['backgroundColor'] = '#00A699';
             style['color'] = 'white';
@@ -90,7 +90,7 @@ class DateGridListItem extends React.Component {
                 style={style}
                 onMouseEnter={() => {this.hoverOver(dateTime)}}
                 onClick={() => {this.clickHandler(dateTime)}}>
-                    <time dateTime={dateTime}>{this.state.day}</time>
+                    <time dateTime={dateTime}>{this.props.day}</time>
             </button>
         );
     }
