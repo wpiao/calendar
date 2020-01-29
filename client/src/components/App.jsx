@@ -27,7 +27,13 @@ class App extends Component {
     this.buttonCLick = this.buttonCLick.bind(this);
     this.mouseEnter = this.mouseEnter.bind(this);
     this.updateDateMonth = this.updateDateMonth.bind(this);
+    this.clearState = this.clearState.bind(this);
   }
+
+  // componentDidMount() {
+  //   // axios be used to get data from DB
+
+  // }
 
   monthConversion(index) {
     let m = 
@@ -89,6 +95,21 @@ class App extends Component {
 
   }
 
+  clearState() {
+    //console.log('hi');
+
+    this.setState({
+      // monthNumber: this.state.monthNumber,
+      // month: this.state.month,
+      // year: this.state.year,
+      // days: this.state.days,
+
+      hoverDate: '',
+      startDate: '',
+      endDate: ''
+    });
+  }
+
   buttonCLick(dateTime) {
     if(!this.state.startDate) {
       var date = 'startDate';
@@ -139,13 +160,18 @@ class App extends Component {
   }
 
   render() {
-    let monthYear = {month: this.state.monthNumber, year: this.state.year};
+    let monthYear = {
+      month: this.state.monthNumber, 
+      year: this.state.year, 
+      startDate: this.state.startDate,
+      endDate: this.state.endDate
+    };
     let listOfColorDates = this.colorDates();
     let lastFillDate = Boolean(this.state.endDate) === true;
     let hide = Boolean(this.state.startDate);
 
-    console.log('state');
-    console.log(this.state);
+    // console.log('state');
+    // console.log(this.state);
 
     return (
     <main>
@@ -162,7 +188,9 @@ class App extends Component {
           mouseEnter={this.mouseEnter}
           listOfColorDates={listOfColorDates}
           lastFillDate={lastFillDate}/>
-        <ClearDate hide={hide}/>
+        <ClearDate 
+          hide={hide}
+          clearState={this.clearState}/>
       </div>
     </main>
     );

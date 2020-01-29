@@ -30,13 +30,13 @@ class ClearDate extends React.Component {
                     <p id="clear-date-empty"></p>   
                     <p 
                         style={style}
+                        onClick={this.props.clearState}
                         onMouseEnter={this.underlineClearDate} 
                         onMouseLeave={this.underlineClearDate}
                         id="clear-date" >Clear dates
                     </p> 
                 </div>
                 : null ;
-        //return(<p id="clear-date">Clear dates</p>)
     }
 }
 

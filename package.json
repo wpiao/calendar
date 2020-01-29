@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "react-dev": "webpack -w",
     "start": "nodemon ./server/index.js"
   },
@@ -16,6 +16,10 @@
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.4.3",
+    "jest": "^25.1.0",
     "react-inlinesvg": "^1.2.0",
     "svg-inline-loader": "^0.8.0",
     "webpack": "^4.41.0",
@@ -23,13 +27,14 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
-    "serialize-javascript": ">=2.1.1",
     "body-parser": "^1.19.0",
     "express": "^4.15.0",
+    "faker": "^4.1.0",
     "mysql": "^2.16.0",
     "nodemon": "^1.19.2",
     "react": "^16.10.1",
-    "react-dom": "^16.10.1"
+    "react-dom": "^16.10.1",
+    "serialize-javascript": ">=2.1.1"
   },
   "babel": {
     "presets": [

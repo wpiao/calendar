@@ -15,15 +15,17 @@ var DateGridList = (props) => {
 
                 // console.log('hoverDates in list', hoverDates);
                 // console.log('number', number);
-
+                var startEndDate = {
+                    startDate: props.startDate,
+                    endDate: props.endDate
+                }
                 var hoverColor = hoverDates.indexOf(number) !== -1;
-                // console.log(number);
-                // console.log(hoverColor);
                 
                 return (<DateGridListItem
                     key={number.toString()}
                     day={number}
                     hoverColor={hoverColor}
+                    startEndDate={startEndDate}
                     monthYear={props.monthYear}
                     updateStartEndDate={props.updateStartEndDate}
                     mouseEnter={props.mouseEnter}
