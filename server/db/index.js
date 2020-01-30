@@ -5,19 +5,13 @@ var connection = mysql.createConnection({
     user: "root"
 });
 
-connection.connect(function(err) {
-    if (err) {
-        console.log('login failure, mysql -u root');
-        return;
-    }
-
-    console.log("Connected!");
-    let sqlRequest = "use calendar;";
-    connection.query(sqlRequest, function (err, result) {
-      if (err) 
-        console.log('failure on use calendar');
-    });
-});
+// connection.connect(function(err) {
+//     if (err) {
+//         console.log('login failure, mysql -u root');
+//         return;
+//     }
+//     console.log("DB Connection Success @ db/index.js");
+// });
   
 module.exports = connection;
 

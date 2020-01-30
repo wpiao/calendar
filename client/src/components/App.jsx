@@ -14,14 +14,20 @@ class App extends Component {
     var year = date.getFullYear();
 
     this.state = {
-        monthNumber: monthNumber,
-        month: month,
+        monthNumber: monthNumber, // 1-12
+        month: month, // full string name
         year: year,
-        days: this.daysArray(1, this.getDaysInMonth(monthNumber, year)),
+        days: this.daysArray(1, this.getDaysInMonth(monthNumber, year)), // array of days in current month
 
+        // hover/start/end date represented in [year-month-day] "2020-01-22"
         hoverDate: '',
         startDate: '',
-        endDate: ''
+        endDate: '',
+
+        // a dates of days that are avalible and not avalible in a given month
+        // ex: [{1: T}, {2: F}, ... {31: T}]
+        avalibility: []
+
     };
 
     this.buttonCLick = this.buttonCLick.bind(this);
@@ -30,11 +36,33 @@ class App extends Component {
     this.clearState = this.clearState.bind(this);
   }
 
-  // componentDidMount() {
-  //   // axios be used to get data from DB
+  componentDidMount() {
+    let unavaliable_Dates = ['01/04/2020', '01/05/2020', '01/12/2020'];
 
-  // }
+    let unavalible_Days = [];
+    unavaliable_Dates.forEach(date => {
+      //month = Number(ate.substring(0, 2));
+      //year = Number(date.substring(6,));
+      let _day = Number(date.substring(3, 5));
+      unavalible_Days.push(_day);
+    });
 
+    let avalibility = {};
+    this.state.days.forEach(day => {
+      if(unavalible_Days.indexOf(day) !== -1){
+        avalibility[day] = false;
+      } else {
+        avalibility[day] = true;
+      }
+    });
+
+    this.setState({
+      avalibility: avalibility
+    })
+  }
+
+  /*  0- index */
+  /* returns the month given an index number */
   monthConversion(index) {
     let m = 
         ['January', 'February', 'March', 'April', 'May',
@@ -45,6 +73,7 @@ class App extends Component {
     return m[index];
   }
 
+
   daysArray(low, end) {
     var list = [];
     for (var i = low; i <= end; i++) 
@@ -53,13 +82,19 @@ class App extends Component {
     return list;
   }
 
+  
+  /* returns number of days given a month and year number */
   getDaysInMonth(month, year) {
+    // month from 1-12;
     console.log(new Date(year, month, 0).getDate());
     return new Date(year, month, 0).getDate();
   };
 
+
+  /* updates view of calendar when user clicks next/prev button */
   updateDateMonth(typeMonth) {
     var y, m;
+    // next month
     if(typeMonth === 'nextMonth') {
 
       if(this.state.monthNumber === 12){
@@ -70,7 +105,8 @@ class App extends Component {
         m = this.state.monthNumber + 1;
       }
 
-    } else {
+    
+    } else { // prev month
 
       if(this.state.monthNumber === 1){
         y = this.state.year - 1;
@@ -95,8 +131,8 @@ class App extends Component {
 
   }
 
+  /* clears start and end date */
   clearState() {
-    //console.log('hi');
 
     this.setState({
       // monthNumber: this.state.monthNumber,
@@ -110,6 +146,7 @@ class App extends Component {
     });
   }
 
+  /* sets startDate or endDate depending on button click */
   buttonCLick(dateTime) {
     if(!this.state.startDate) {
       var date = 'startDate';
@@ -121,6 +158,7 @@ class App extends Component {
     })
   }
 
+  /* sets state [hovereDate] for specific days that are hovered */
   mouseEnter(dateTime) {
     let firstDay = Number(this.state.startDate.slice(-2));
     let hoverDay  =  Number(dateTime.slice(-2));
@@ -136,6 +174,8 @@ class App extends Component {
     }
   }
 
+  /* helper function for colorDates() */
+  /* returns an array between and including two numbers */
   listBetweenTwoNumbers(low, end) {
     var list = [];
     for (var i = low; i <= end; i++) 
@@ -144,6 +184,7 @@ class App extends Component {
     return list;
   }
 
+  /* returns an array of days that need to be colored [hover] */
   colorDates() {
     if(this.state.startDate) {
       let firstDay = Number(this.state.startDate.slice(-2));
@@ -160,6 +201,8 @@ class App extends Component {
   }
 
   render() {
+    console.log('avalibility', this.state.avalibility);
+
     let monthYear = {
       month: this.state.monthNumber, 
       year: this.state.year, 
@@ -187,7 +230,9 @@ class App extends Component {
           updateStartEndDate={this.buttonCLick}
           mouseEnter={this.mouseEnter}
           listOfColorDates={listOfColorDates}
-          lastFillDate={lastFillDate}/>
+          lastFillDate={lastFillDate} // sends T or F if there exist a last date
+          avalibility={this.state.avalibility}
+          />
         <ClearDate 
           hide={hide}
           clearState={this.clearState}/>

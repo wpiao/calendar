@@ -81,7 +81,7 @@ main {
 .date-grid button:focus {
   outline: none;
   background-color: #E4E7E7;
-  color: #757575;;
+  color: #484848;;
 }
 
 .date-grid button:active,
