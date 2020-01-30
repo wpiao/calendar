@@ -210,7 +210,7 @@ class App extends Component {
       endDate: this.state.endDate
     };
     let listOfColorDates = this.colorDates();
-    let lastFillDate = Boolean(this.state.endDate) === true;
+    //let lastFillDate = Boolean(this.state.endDate) === true;
     let hide = Boolean(this.state.startDate);
 
     // console.log('state');
@@ -230,7 +230,7 @@ class App extends Component {
           updateStartEndDate={this.buttonCLick}
           mouseEnter={this.mouseEnter}
           listOfColorDates={listOfColorDates}
-          lastFillDate={lastFillDate} // sends T or F if there exist a last date
+          //lastFillDate={lastFillDate} // sends T or F if there exist a last date
           avalibility={this.state.avalibility}
           />
         <ClearDate 

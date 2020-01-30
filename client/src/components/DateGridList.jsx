@@ -58,9 +58,9 @@ var DateGridList = (props) => {
 
                     // functions
                     updateStartEndDate={props.updateStartEndDate}
-                    mouseEnter={props.mouseEnter}
+                    mouseEnter={props.mouseEnter} />)
 
-                    lastFillDate={props.lastFillDate}/>)
+                    //lastFillDate={props.lastFillDate}/>)
             })}
         </div>
     );
