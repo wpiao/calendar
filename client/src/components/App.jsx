@@ -24,6 +24,10 @@ class App extends Component {
         startDate: '',
         endDate: '',
 
+        // secondary start/end date
+        secondaryStartDate: '',
+        secondaryEndDate: '',
+
         // a dates of days that are avalible and not avalible in a given month
         // ex: [{1: T}, {2: F}, ... {31: T}]
         avalibility: []
@@ -142,19 +146,28 @@ class App extends Component {
 
       hoverDate: '',
       startDate: '',
-      endDate: ''
+      endDate: '',
+      secondaryStartDate: '',
+      secondaryEndDate: ''
     });
   }
 
   /* sets startDate or endDate depending on button click */
   buttonCLick(dateTime) {
+    var secondaryStartDate
     if(!this.state.startDate) {
       var date = 'startDate';
-    } else {
+      secondaryStartDate = dateTime;
+    } else if(!this.state.endDate) {
       var date = 'endDate';
-    } 
+      secondaryStartDate = this.state.secondaryStartDate
+    } else {
+      return;
+    }
+
     this.setState({
-      [date]: dateTime 
+      [date]: dateTime,
+      secondaryStartDate: secondaryStartDate 
     })
   }
 

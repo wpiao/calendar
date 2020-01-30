@@ -37,8 +37,10 @@ main {
 /* // CSS grid used for the dates */
 .day-of-week,
 .date-grid {
+  /* display: inline-grid; */
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  /* //border: 1px black solid; */
 }
 
 /* // Styles for the weekday/weekend header */
@@ -84,11 +86,11 @@ main {
   color: #484848;;
 }
 
-.date-grid button:active,
+/* .date-grid button:active,
 .date-grid button.is-selected {
-  /* background-color: var(--teal-600); */
+  --background-color: var(--teal-600); 
   color: white;
-}
+} */
 
 
 #clear-date-empty {
