@@ -13,7 +13,7 @@ html {
 }
 
 body {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background: white;
 }
 
@@ -26,12 +26,94 @@ main {
   border-radius: 8px;
 }
 
-/* // For the month */
+.calendar {
+  padding: 1.5em;
+  border: 1px solid #E4E4E4;
+  border-radius: 0.1em;
+  margin-top: 0.4em;
+}
+
+/* ----------------------------------- */
+/* CheckInOut */
+
+.check-in-out {
+  padding: 0.2em;
+  border: 1px solid #E4E4E4;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 42fr 10fr 43fr;
+  border-radius: 0.1em;
+}
+
+
+/* .container > * {
+  flex: 1; /*grow
+} */
+
+.checkInOut-text {
+  font-family: 'Montserrat';
+  /* margin: auto; /* Important */
+  margin-top: auto;
+  margin-bottom: auto;
+
+  /* text-align: center; */
+  background-color: #99EDE6;
+  color: #757575;
+
+  border-radius: 0.1em;
+}
+
+.in-check {
+  padding-left: 0.4em;
+  margin-left: 0.4em;
+
+}
+
+.out-check {
+  padding-left: 0.4em;
+  margin-right: 0.4em;
+}
+
+
+
+/* #99EDE6 */
+
+/* #left-check {
+  float: left;
+}
+
+#right-check {
+  float: right;
+} */
+
+/* arrow svg */
+#check-in-out-svg {
+  width: 1.9em;
+  height: 1.8em;
+}
+
+/* ----------------------------------- */
+
+
+
+
+
+/* ----------------------------------- */
+
+
+/* currnet month label */
 .month-indicator {
   color:#484848;
   text-align: center;
   font-weight: 750;
   letter-spacing: 0.0em;
+
+  display: grid;
+  grid-template-columns: 25fr 50fr 25fr;
+  align-items: center;
+  grid-auto-rows: 1fr;
+  
+  /* padding-top: 0.2em; */
 }
 
 /* // CSS grid used for the dates */
@@ -40,6 +122,7 @@ main {
   /* display: inline-grid; */
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  /* grid-gap: 0.02em; */
   /* //border: 1px black solid; */
 }
 
@@ -49,6 +132,7 @@ main {
 }
 
 .day-of-week > * {
+  /* font-family: 'Montserrat'; */
   font-size: 0.65em;
   color: #757575;
   font-weight: 400;
@@ -68,7 +152,7 @@ main {
 /* // Style for each day */
 .date-grid button {
   position: relative;
-  /* border: 0.5px solid #767676; */
+  border: 1px solid #767676;
   border: 0;
   width: 4.7ch;
   height: 4.7ch;
@@ -109,16 +193,16 @@ main {
   display: inline-block;
 }
 
-#month-container {
+/* #month-container {
   height: 1.3em;
-}
+} */
 
 #prev-button {
   float: left
 }
 
 #next-button {
-  float: right
+  justify-self: end;
 }
 
 .svg {

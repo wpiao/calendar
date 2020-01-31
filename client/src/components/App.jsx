@@ -3,6 +3,8 @@ import MonthIndicator from './MonthIndicator.jsx';
 import DayOfWeek from './DayOfWeek.jsx';
 import DateGridList from './DateGridList.jsx';
 import ClearDate  from './ClearDate.jsx';
+import CheckInOut from './CheckInOut.jsx';
+import PricePerNight from './PricePerNight.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -230,7 +232,13 @@ class App extends Component {
     // console.log(this.state);
 
     return (
+
+      // Need to pass in start and end date to props CheckInOut
+
     <main>
+      
+      <PricePerNight />
+      <CheckInOut /> 
       <div className="calendar">
         <MonthIndicator 
           month={this.state.month} 

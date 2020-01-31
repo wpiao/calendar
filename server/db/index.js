@@ -6,11 +6,11 @@ var connection = mysql.createConnection({
 });
 
 connection.connect(function(err) {
-  if (err) {
+  if (err) { 
     console.log("login failure, mysql -u root");
     return;
   }
-  
+
   console.log("DB Connection Success @ db/index.js");
 });
 
