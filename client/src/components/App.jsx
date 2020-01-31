@@ -238,7 +238,7 @@ class App extends Component {
     <main>
       
       <PricePerNight />
-      <CheckInOut /> 
+      <CheckInOut monthYear={monthYear}/> 
       <div className="calendar">
         <MonthIndicator 
           month={this.state.month} 
