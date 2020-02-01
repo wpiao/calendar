@@ -1,4 +1,4 @@
-var db = require("./index.js");
+var db = require("./index.js").connection;
 
 var faker = require("faker");
 var streetAddr = faker.address.streetAddress();
@@ -8,7 +8,7 @@ var zip = faker.address.zipCode();
 console.log(streetAddr + ", " + city + ", " + state + " " + zip + " ");
 
 let multiAddress = [];
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 2; i++) {
   var streetAddr = faker.address.streetAddress();
   var city = faker.address.city();
   var state = faker.address.state();
@@ -22,12 +22,16 @@ for (let i = 0; i < 100; i++) {
 console.log(multiAddress);
 
 var unvailDates = [
+  [1, "2020-02-01", "2020-02-04"],
+  [1, "2020-02-10", "2020-02-10"],
+  [1, "2020-03-15", "2020-03-19"],
+  [1, "2020-03-24", "2020-03-26"],
   [1, "2020-04-01", "2020-05-01"],
   [1, "2020-12-02", "2020-12-02"],
   [2, "2020-04-05", "2020-05-06"]
 ];
 
-let sqlRequest = "use calendar;";
+let sqlRequest = "select * from address;";
 db.query(sqlRequest, function(err, result1) {
   if (err) console.log("failure on use calendar");
   else {
