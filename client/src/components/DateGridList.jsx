@@ -5,7 +5,7 @@ var DateGridList = (props) => {
 
     // props.array= [7,8,9,...23]
     //hoverHighlight={true}
-    console.log(props.listOfColorDates);
+    //console.log(props.listOfColorDates);
     var hoverDates = props.listOfColorDates;
 
 
@@ -21,7 +21,7 @@ var DateGridList = (props) => {
                 var startingDay, endingDay;
                 if(props.monthYear.startDate) {
                     var start_Day = props.monthYear.startDate.slice(-2);
-                    console.log('hi', start_Day);
+                    //console.log('hi', start_Day);
                     startingDay = Number(start_Day) === number;
                 }
 

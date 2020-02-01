@@ -4,7 +4,7 @@ class DateGridListItem extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log('color', this.props.hoverColor);
+        //console.log('color', this.props.hoverColor);
 
         this.state = {
             // day: this.props.day,
@@ -28,12 +28,18 @@ class DateGridListItem extends React.Component {
             return number.toString(); 
     }
 
-    hoverOver(dateTime) {
+    hoverOver(dateTime, avalibility) {
+        if(!avalibility)
+            return;
+
         // send just the hover item back ??
         this.props.mouseEnter(dateTime);
     }
 
-    clickHandler(dateTime) {
+    clickHandler(dateTime, avalibility) {
+        if(!avalibility)
+            return;
+
         console.log('ListItem', dateTime);
         this.props.updateStartEndDate(dateTime);
 
@@ -65,7 +71,9 @@ class DateGridListItem extends React.Component {
 
         let style = {};
         style['gridColumn'] = this.firstGridColumn(this.props.day);
-        if(this.props.start_end.startingDay){
+
+        // starting day
+        if(this.props.start_end.startingDay && !this.props.monthYear.inSecondaryMonth){
             style['backgroundColor'] = '#00A699';
             style['color'] = 'white';
         }
@@ -95,8 +103,8 @@ class DateGridListItem extends React.Component {
             // note come back to dateTime and ask a TA
             <button 
                 style={style}
-                onMouseEnter={() => {this.hoverOver(dateTime)}}
-                onClick={() => {this.clickHandler(dateTime)}}>
+                onMouseEnter={() => {this.hoverOver(dateTime, this.props.avalibility)}}
+                onClick={() => {this.clickHandler(dateTime, this.props.avalibility)}}>
                     <time dateTime={dateTime}>{this.props.day}</time>
             </button>
         );
