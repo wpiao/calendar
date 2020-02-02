@@ -3,26 +3,8 @@ import right from "../../dist/svg/checkArrow.svg";
 import SVG from "react-inlinesvg";
 
 class CheckInOut extends React.Component {
-
     constructor(props) {
         super(props);
-
-        this.state = {
-            startSelected: false,
-            endSelected: false
-        }
-
-        this.clickHandler = this.clickHandler.bind(this);
-    }
-
-    clickHandler(startEnd) {
-        console.log(event.target);
-        console.log({
-            [startEnd]: !this.state[startEnd]
-        })
-        this.setState({
-            [startEnd]: !this.state[startEnd]
-        })
     }
 
     convertDateAirbnbFormat(_date) {
@@ -42,43 +24,31 @@ class CheckInOut extends React.Component {
         var endText = this.props.status.endDate ? 
             this.convertDateAirbnbFormat(this.props.status.endDate) : 'Checkout';
 
-        var startStyle, endStyle;
+        var startStyle = {};
+        var endStyle = {};
 
+        var reveal = this.props.revealState;
+        var startDate = this.props.status.startDate;
+        var endDate = this.props.status.endDate;
 
+        if(reveal && !startDate){
+            startStyle['backgroundColor'] =  '#99EDE6';
+            startStyle['color'] = '#227A87';
+        } else if (startDate && reveal && !endDate){
+            startStyle['backgroundColor'] = 'white';
+            startStyle['color'] = '#757575';
 
-        if(this.props.status.startDate) {
-            startStyle = {
-                backgroundColor: "white",
-                color: '#757575'
-            };
+            endStyle['backgroundColor'] =  '#99EDE6';
+            endStyle['color'] = '#227A87';
 
-            endStyle = {
-                backgroundColor: "#99EDE6",
-                color: '#227A87'
-            }
+        } else if (startDate && reveal && endDate){
+            startStyle['backgroundColor'] =  '#99EDE6';
+            startStyle['color'] = '#227A87';
+
+            endStyle['backgroundColor'] =  '#white';
+            endStyle['color'] = '#757575';
+
         }
-
-        if(this.props.status.startDate && this.props.status.endDate) {
-            startStyle = {
-                backgroundColor: "white",
-                color: '#757575'
-            };
-
-            endStyle = {
-                backgroundColor: "white",
-                color: '#757575'
-            }
-        }
-
-        if(this.state.startSelected) {
-            startStyle = {
-                backgroundColor: "#99EDE6",
-                color: '#227A87'
-            };
-        }
-
-        
-
 
         return (
             <div>
@@ -87,7 +57,7 @@ class CheckInOut extends React.Component {
                     <div 
                         className="in-check checkInOut-text"
                         style={startStyle}
-                        onClick={() => this.clickHandler('startSelected')}
+                        onClick={this.props.revealCalendar}
                         >{startText}</div>
                     <SVG
                         id="check-in-out-svg"

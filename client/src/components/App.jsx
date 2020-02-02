@@ -37,7 +37,7 @@ class App extends Component {
         // ex: [{1: T}, {2: F}, ... {31: T}]
         avalibility: [],
 
-        hidden: false
+        reveal: false
 
     };
 
@@ -45,6 +45,7 @@ class App extends Component {
     this.mouseEnter = this.mouseEnter.bind(this);
     this.updateDateMonth = this.updateDateMonth.bind(this);
     this.clearState = this.clearState.bind(this);
+    this.revealCalendar = this.revealCalendar.bind(this);
   }
 
   componentDidMount() {
@@ -149,8 +150,6 @@ class App extends Component {
       updatedMonth = this.stringMonthZeroPad(_m);
     }
 
-
-
     axios.get('http://localhost:3001/month', {
       params: {
           "id": 1,
@@ -197,7 +196,6 @@ class App extends Component {
         }
 
         // secondaryStartDate
-        // var secondaryStartDate;
         if(!this.state.secondaryStartDate){
           if(this.state.startDate && !this.state.secondaryStartDate) {
             secondaryStartDate = new Date(y, m-1, 1).toISOString().split('T')[0]
@@ -222,11 +220,7 @@ class App extends Component {
       var month = this.monthConversion(date.getMonth());
       var year = date.getFullYear();
 
-
-
-
       //-------------------------------------------
-
 
       this.setState({
         avalibility: avalibility,
@@ -251,10 +245,6 @@ class App extends Component {
   clearState() {
 
     this.setState({
-      // monthNumber: this.state.monthNumber,
-      // month: this.state.month,
-      // year: this.state.year,
-      // days: this.state.days,
 
       hoverDate: '',
       startDate: '',
@@ -283,6 +273,12 @@ class App extends Component {
     var secondaryEndDate = '';
     if(!this.state.startDate) {
       var date = 'startDate';
+
+      this.setState({
+        // hoverDate: '',
+        [date]: dateTime,
+        secondaryEndDate: secondaryEndDate,
+      })
     } else if(!this.state.endDate) {
       var date = 'endDate';
       //this.getDaysInMonth()
@@ -295,19 +291,18 @@ class App extends Component {
         secondaryEndDate = temp.toISOString().split('T')[0];
       }
 
+      this.setState({
+        // hoverDate: '',
+        [date]: dateTime,
+        secondaryEndDate: secondaryEndDate,
 
-
-
+        // come back here if error
+        reveal: false
+      })
 
     } else {
       return;
     }
-
-    this.setState({
-      // hoverDate: '',
-      [date]: dateTime,
-      secondaryEndDate: secondaryEndDate
-    })
   }
 
   /* sets state [hovereDate] for specific days that are hovered */
@@ -416,11 +411,17 @@ class App extends Component {
     return obj;
   }
 
+  revealCalendar() {
+    this.setState({
+      reveal: true
+    });
+  }
+
+
+
   render() {
-    //console.log('avalibility', this.state.avalibility);
 
-
-    let displayCalendar = this.state.hidden ? {display: 'none'} : {display: null};
+    let displayCalendar = !this.state.reveal ? {display: 'none'} : {display: null};
 
     let status = {
       startDate: this.state.startDate,
@@ -432,17 +433,15 @@ class App extends Component {
     //let lastFillDate = Boolean(this.state.endDate) === true;
     let hide = Boolean(this.state.startDate);
 
-    // console.log('state');
-    // console.log(this.state);
-
     return (
-
-      // Need to pass in start and end date to props CheckInOut
-
     <main>
       
       <PricePerNight />
-      <CheckInOut status={status}/> 
+      <CheckInOut 
+        status={status} 
+        revealCalendar={this.revealCalendar}
+        revealState={this.state.reveal}
+      /> 
       <div className="calendar" style={displayCalendar}>
         <MonthIndicator 
           month={this.state.month} 
