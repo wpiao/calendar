@@ -36,7 +36,7 @@ class CheckInOut extends React.Component {
             startStyle['color'] = '#227A87';
         } else if (startDate && reveal && !endDate){
             startStyle['backgroundColor'] = 'white';
-            startStyle['color'] = '#757575';
+            startStyle['color'] = '#484848';
 
             endStyle['backgroundColor'] =  '#99EDE6';
             endStyle['color'] = '#227A87';
@@ -45,9 +45,14 @@ class CheckInOut extends React.Component {
             startStyle['backgroundColor'] =  '#99EDE6';
             startStyle['color'] = '#227A87';
 
-            endStyle['backgroundColor'] =  '#white';
-            endStyle['color'] = '#757575';
+            endStyle['backgroundColor'] =  'white';
+            endStyle['color'] = '#484848';
+        } else if(startDate && !reveal && endDate) {
+            startStyle['backgroundColor'] = 'white';
+            startStyle['color'] = '#484848';
 
+            endStyle['backgroundColor'] =  'white';
+            endStyle['color'] = '#484848';
         }
 
         return (

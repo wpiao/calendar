@@ -275,3 +275,60 @@ main {
   width: 2.1em;
   height: 1.8em;
 }
+
+/* ----------------------------------- */
+
+.guest-heading{
+  font-size: 0.75em;
+  color: #484848;
+  margin-bottom: 0.11em;
+
+}
+
+#guest {
+  padding: 0.2em;
+  border: 1px solid #E4E4E4;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 42fr 5fr;
+  border-radius: 0.1em;
+
+}
+
+#guest-1 {
+  font-family: 'Montserrat';
+  color: #484848;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 0.9em;
+  margin-right: 11.85em;
+
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+
+
+  /* //changee */
+  padding-left: 0.5em; 
+
+
+  background-color: #99EDE6;
+  border-radius: 0.2em;
+
+}
+
+.svg-up-down {
+  width: 1.8em;
+  height: 1.8em;
+  position: relative;
+  bottom: 9%;
+}
+
+.border-bottom {
+  padding-top: 0.2em;
+    border-bottom: #238186 solid 2px;
+    margin-bottom: -4px;
+}
+
+
+
+/* ----------------------------------- */

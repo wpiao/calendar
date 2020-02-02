@@ -6,6 +6,7 @@ import DateGridList from './DateGridList.jsx';
 import ClearDate  from './ClearDate.jsx';
 import CheckInOut from './CheckInOut.jsx';
 import PricePerNight from './PricePerNight.jsx';
+import Guest from './Guest.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -461,7 +462,7 @@ class App extends Component {
           hide={hide}
           clearState={this.clearState}/>
       </div>
-      <div>helloo</div>
+      <Guest />
     </main>
     );
   }
