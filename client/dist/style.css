@@ -23,14 +23,19 @@ main {
   padding: 1.5em;
   background-color: #fff;
   border: 1px solid #E4E4E4;
-  border-radius: 8px;
+  border-radius: 0.5px;
 }
 
 .calendar {
-  padding: 1.5em;
+  position: absolute;
   border: 1px solid #E4E4E4;
   border-radius: 0.1em;
   margin-top: 0.4em;
+  background-color: white;
+  padding-top: 1.5em;
+  padding-right: 1.5em;
+  padding-bottom: 1.8em;
+  padding-left: 1.5em;
 }
 
 /* ----------------------------------- */
@@ -82,26 +87,76 @@ main {
 }
 
 
-
-/* #99EDE6 */
-
-/* #left-check {
-  float: left;
-}
-
-#right-check {
-  float: right;
-} */
-
-/* arrow svg */
 #check-in-out-svg {
   width: 1.9em;
   height: 1.8em;
 }
 
+.date-heading {
+  font-size: 0.75em;
+  color: #484848;
+  margin-bottom: 0.11em;
+  
+  /* //font-family: 'Montserrat'; */
+}
+
 /* ----------------------------------- */
 
+#star-review {
+  border-bottom: 1px solid #E4E4E4;
+  display: grid;
+  grid-template-columns: 9fr 23fr 247fr;
+  padding-bottom: 0.92em;
+  margin-bottom: 0.8em;
+  /* border */
+}
 
+#star {
+  width: 0.5em;
+  height: 0.5em;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+/* https://vhandit.blogspot.com/2015/08/snippet-css-child-element-overlap-parent.html */
+#rating {
+  font-size: 0.7em;
+  color: #484848;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#review {
+
+  color: #767676;
+  font-size: 0.65em;
+  font-family: 'Montserrat';
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#price-night-container {
+  display: grid;
+  grid-template-columns: 13fr 76fr;
+  /* padding-bottom: 0.8em;
+  margin-bottom: 0.8em; */
+}
+
+#price {
+  font-size: 1.3em;
+  color: #484848;
+}
+
+#per-night {
+  /* font-family: 'Montserrat'; */
+  font-size: 0.7em;
+  font-weight: 500;
+  color: #484848;
+  padding-top: 0.8em;
+  padding-bottom: 0em;
+  padding-left: 0.25em;
+
+
+}
 
 
 
@@ -164,7 +219,8 @@ main {
   width: 4.7ch;
   height: 4.7ch;
   /* border-radius: 50%; */
-  background-color: transparent;
+  /* background-color: transparent; */
+  background-color: white;
   /* color:#484848; */
   font-size: 0.75em;
   font-weight: 700;

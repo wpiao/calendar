@@ -112,6 +112,64 @@ Hovering
 		else: 
 
 
+Define your API
+	http://localhost:3001/calendar/:homeID
+		- where homeID represents a parameter to a specific address
+
+		Call to this API:
+
+			GET request: 
+				gets all data of unavailable dates of a specific home
+				when given address of that home. 
+
+				response: 
+					- 200 + unavailable dates
+					- 404
+
+			POST request:
+				JSON data:
+					{
+						id: ...,
+						startDate:
+						endDate:
+					}
+
+				response: 
+					- 200
+					- 404
+
+Database: 
+	SQL
+
+
+Data Shape (schema):
+
+
+
+
+
+----------------------------------------------------------------
+
+	Generate "realistic" mock data (for 100 primary records) and load it into your DB
+
+
+		Get 100 fake address, load it into DB ... (address)
+
+
+
+
+
+
+	Build a server that can serve an index.html file which then loads the app and renders it to the page (using react and webpack-dev [development] and webpack [production]).
+
+		webpack-dev [development] and webpack [production] ??
+
+
+-----------
+
+npm i --save-dev jest
+
+
 			
 
 

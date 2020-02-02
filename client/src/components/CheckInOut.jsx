@@ -36,43 +36,45 @@ class CheckInOut extends React.Component {
 
     // #99EDE6
     render() {
-        var startText = this.props.monthYear.startDate ? 
-            this.convertDateAirbnbFormat(this.props.monthYear.startDate) : 'Check-in';
+        var startText = this.props.status.startDate ? 
+            this.convertDateAirbnbFormat(this.props.status.startDate) : 'Check-in';
         
-        var endText = this.props.monthYear.endDate ? 
-            this.convertDateAirbnbFormat(this.props.monthYear.endDate) : 'Checkout';
+        var endText = this.props.status.endDate ? 
+            this.convertDateAirbnbFormat(this.props.status.endDate) : 'Checkout';
 
         var startStyle, endStyle;
+
+
+
+        if(this.props.status.startDate) {
+            startStyle = {
+                backgroundColor: "white",
+                color: '#757575'
+            };
+
+            endStyle = {
+                backgroundColor: "#99EDE6",
+                color: '#227A87'
+            }
+        }
+
+        if(this.props.status.startDate && this.props.status.endDate) {
+            startStyle = {
+                backgroundColor: "white",
+                color: '#757575'
+            };
+
+            endStyle = {
+                backgroundColor: "white",
+                color: '#757575'
+            }
+        }
 
         if(this.state.startSelected) {
             startStyle = {
                 backgroundColor: "#99EDE6",
                 color: '#227A87'
             };
-        }
-
-        if(this.props.monthYear.startDate) {
-            startStyle = {
-                backgroundColor: "white",
-                color: '#757575'
-            };
-
-            endStyle = {
-                backgroundColor: "#99EDE6",
-                color: '#227A87'
-            }
-        }
-
-        if(this.props.monthYear.startDate && this.props.monthYear.endDate) {
-            startStyle = {
-                backgroundColor: "white",
-                color: '#757575'
-            };
-
-            endStyle = {
-                backgroundColor: "white",
-                color: '#757575'
-            }
         }
 
         

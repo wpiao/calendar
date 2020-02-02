@@ -35,7 +35,9 @@ class App extends Component {
 
         // a dates of days that are avalible and not avalible in a given month
         // ex: [{1: T}, {2: F}, ... {31: T}]
-        avalibility: []
+        avalibility: [],
+
+        hidden: false
 
     };
 
@@ -47,8 +49,6 @@ class App extends Component {
 
   componentDidMount() {
 
-    //console.log(this.state.monthNumber, )
-    
     axios.get('http://localhost:3001/month', {
       params: {
           "id": 1,
@@ -58,12 +58,9 @@ class App extends Component {
     })
     .then((response) => {
       let unavaliable_Dates = response.data;
-      unavaliable_Dates = [];
-
       let unavalible_Days = [];
       unavaliable_Dates.forEach(date => {
-        //month = Number(unavaliable_Dates.substring(5,7));
-        //year = Number(unavaliable_Dates.substring(0,4));
+
         let _day = Number(date.substring(8,));
         unavalible_Days.push(_day);
       });
@@ -76,7 +73,6 @@ class App extends Component {
           avalibility[day] = true;
         }
       });
-
       this.setState({
         avalibility: avalibility
       });
@@ -116,62 +112,137 @@ class App extends Component {
     return new Date(year, month, 0).getDate();
   };
 
+  stringMonthZeroPad(month){
+      var monthStr;
+      if( month < 10 ){
+        monthStr = "0"+month;
+      } else {
+        monthStr= month.toString;
+      }
+      return monthStr;
+  }
 
   /* updates view of calendar when user clicks next/prev button */
   updateDateMonth(typeMonth) {
-    var y, m;
 
-    var secondaryStartDate;
-    if(this.state.secondaryStartDate){
-      secondaryStartDate = this.state.secondaryStartDate;
-    }
-
-    // next month
-    if(typeMonth === 'nextMonth') {
-
+    let updatedMonth;
+    let _m, _y;
+    if(typeMonth === 'nextMonth'){
       if(this.state.monthNumber === 12){
-        y = this.state.year + 1;
-        m = 1;    
+        _m = 1;
+        _y = this.state.year + 1;
       } else {
-        y = this.state.year;
-        m = this.state.monthNumber + 1;
+        _m = this.state.monthNumber + 1;
+        _y = this.state.year;
       }
+      updatedMonth = this.stringMonthZeroPad(_m);
 
-      // secondaryStartDate
-      // var secondaryStartDate;
-      if(!this.state.secondaryStartDate){
-        if(this.state.startDate && !this.state.secondaryStartDate) {
-          secondaryStartDate = new Date(y, m-1, 1).toISOString().split('T')[0]
-        }
-      } else {
-        secondaryStartDate = this.state.secondaryStartDate
-      }
-    
-    } else { // prev month
-
+    }
+    else{
       if(this.state.monthNumber === 1){
-        y = this.state.year - 1;
-        m = 12;    
+        _m = 12
+        _y = this.state.year - 1;
       } else {
-        y = this.state.year;
-        m = this.state.monthNumber - 1;
+        _m = this.state.monthNumber-1;
+        _y = this.state.year;
       }
+      updatedMonth = this.stringMonthZeroPad(_m);
     }
 
 
-    var date = new Date(y, m-1, 1); // note: zero index
-    var monthNumber = date.getMonth() + 1;
-    var month = this.monthConversion(date.getMonth());
-    var year = date.getFullYear();
 
-    this.setState({
-      monthNumber: monthNumber,
-      month: month,
-      year: year,
-      days: this.daysArray(1, this.getDaysInMonth(monthNumber, year)),
+    axios.get('http://localhost:3001/month', {
+      params: {
+          "id": 1,
+          "month": updatedMonth,
+          "year": _y
+      }
+    })
+    .then((response) => {
+      let unavaliable_Dates = response.data;
+      let unavalible_Days = [];
+      unavaliable_Dates.forEach(date => {
+
+        let _day = Number(date.substring(8,));
+        unavalible_Days.push(_day);
+      });
+  
+      let avalibility = {};
+      this.daysArray(1, this.getDaysInMonth(_m, _y)).forEach(day => {
+        if(unavalible_Days.indexOf(day) !== -1){
+          avalibility[day] = false;
+        } else {
+          avalibility[day] = true;
+        }
+      });
+
+      // update new month
+      //-------------------------------------------
+      var y, m;
+
+      var secondaryStartDate;
+      if(this.state.secondaryStartDate){
+        secondaryStartDate = this.state.secondaryStartDate;
+      }
+
+      // next month
+      if(typeMonth === 'nextMonth') {
+
+        if(this.state.monthNumber === 12){
+          y = this.state.year + 1;
+          m = 1;    
+        } else {
+          y = this.state.year;
+          m = this.state.monthNumber + 1;
+        }
+
+        // secondaryStartDate
+        // var secondaryStartDate;
+        if(!this.state.secondaryStartDate){
+          if(this.state.startDate && !this.state.secondaryStartDate) {
+            secondaryStartDate = new Date(y, m-1, 1).toISOString().split('T')[0]
+          }
+        } else {
+          secondaryStartDate = this.state.secondaryStartDate
+        }
       
-      secondaryStartDate: secondaryStartDate,
-      hoverDate: ''
+      } else { // prev month
+
+        if(this.state.monthNumber === 1){
+          y = this.state.year - 1;
+          m = 12;    
+        } else {
+          y = this.state.year;
+          m = this.state.monthNumber - 1;
+        }
+      }
+
+      var date = new Date(y, m-1, 1); // note: zero index
+      var monthNumber = date.getMonth() + 1;
+      var month = this.monthConversion(date.getMonth());
+      var year = date.getFullYear();
+
+
+
+
+      //-------------------------------------------
+
+
+      this.setState({
+        avalibility: avalibility,
+
+        // update new month
+        monthNumber: monthNumber,
+        month: month,
+        year: year,
+        days: this.daysArray(1, this.getDaysInMonth(monthNumber, year)),
+        
+        secondaryStartDate: secondaryStartDate,
+        hoverDate: ''
+      });
+    })
+    .catch((error) => {
+      console.log('error here');
     });
 
   }
@@ -195,10 +266,12 @@ class App extends Component {
     });
   }
 
+  // date parameter in [yyyy-mm-dd]
   getMonth(date) {
     return date.substring(5,7);
   }
 
+  // date parameter in [yyyy-mm-dd]
   getYear(date) {
     return date.substring(0,4);
   }
@@ -268,6 +341,7 @@ class App extends Component {
     return list;
   }
 
+  // date parameter in [yyyy-mm-dd], return T/F if date in current month
   inCurrentMonth(date) {
     return this.state.monthNumber === Number(this.getMonth(date));
   }
@@ -345,6 +419,14 @@ class App extends Component {
   render() {
     //console.log('avalibility', this.state.avalibility);
 
+
+    let displayCalendar = this.state.hidden ? {display: 'none'} : {display: null};
+
+    let status = {
+      startDate: this.state.startDate,
+      endDate: this.state.endDate
+    }
+
     let monthYear = this.updateCurrentParams();
     let listOfColorDates = this.colorDates();
     //let lastFillDate = Boolean(this.state.endDate) === true;
@@ -360,8 +442,8 @@ class App extends Component {
     <main>
       
       <PricePerNight />
-      <CheckInOut monthYear={monthYear}/> 
-      <div className="calendar">
+      <CheckInOut status={status}/> 
+      <div className="calendar" style={displayCalendar}>
         <MonthIndicator 
           month={this.state.month} 
           year={this.state.year} 
@@ -380,6 +462,7 @@ class App extends Component {
           hide={hide}
           clearState={this.clearState}/>
       </div>
+      <div>helloo</div>
     </main>
     );
   }
