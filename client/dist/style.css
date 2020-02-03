@@ -13,32 +13,183 @@ html {
 }
 
 body {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background: white;
 }
 
 main {
   max-width: max-content;
   margin: 3em auto 0 auto;
-  padding: 1.5em;
+  padding: 1.4em;
   background-color: #fff;
   border: 1px solid #E4E4E4;
-  border-radius: 8px;
+  border-radius: 0.5px;
 }
 
-/* // For the month */
+.calendar {
+  position: absolute;
+  border: 1px solid #E4E4E4;
+  border-radius: 0.1em;
+  margin-top: 0.01em;
+  background-color: white;
+  padding-top: 1.5em;
+  padding-right: 1.5em;
+  padding-bottom: 1.8em;
+  padding-left: 1.5em;
+}
+
+/* ----------------------------------- */
+/* CheckInOut */
+
+#check-in-out-container {
+  margin-bottom: 0.58em;
+}
+
+.check-in-out {
+  padding: 0.2em;
+  border: 1px solid #E4E4E4;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 42fr 10fr 43fr;
+  border-radius: 0.1em;
+}
+
+
+/* .container > * {
+  flex: 1; /*grow
+} */
+
+.checkInOut-text {
+  font-family: 'Montserrat';
+  /* margin: auto; /* Important */
+  margin-top: auto;
+  margin-bottom: auto;
+
+  /* text-align: center; */
+  background-color: white;
+  color: #757575;
+
+  border-radius: 0.2em;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+
+  font-size: 0.9em;
+
+}
+
+.in-check {
+  padding-left: 0.4em;
+  margin-left: 0.4em;
+  margin-right: 0.2em;
+
+}
+
+.out-check {
+  padding-left: 0.4em;
+  margin-right: 0.4em;
+  margin-left: 0.2em;
+}
+
+
+#check-in-out-svg {
+  width: 1.9em;
+  height: 1.8em;
+}
+
+.date-heading {
+  font-size: 0.75em;
+  color: #484848;
+  margin-bottom: 0.11em;
+  
+  /* //font-family: 'Montserrat'; */
+}
+
+/* ----------------------------------- */
+
+#star-review {
+  border-bottom: 1px solid #E4E4E4;
+  display: grid;
+  grid-template-columns: 9fr 23fr 247fr;
+  padding-bottom: 0.92em;
+  margin-bottom: 0.8em;
+  /* border */
+}
+
+#star {
+  width: 0.5em;
+  height: 0.5em;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+/* https://vhandit.blogspot.com/2015/08/snippet-css-child-element-overlap-parent.html */
+#rating {
+  font-size: 0.7em;
+  color: #484848;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#review {
+
+  color: #767676;
+  font-size: 0.65em;
+  font-family: 'Montserrat';
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#price-night-container {
+  display: grid;
+  grid-template-columns: 13fr 76fr;
+  /* padding-bottom: 0.8em;
+  margin-bottom: 0.8em; */
+}
+
+#price {
+  font-size: 1.3em;
+  color: #484848;
+}
+
+#per-night {
+  /* font-family: 'Montserrat'; */
+  font-size: 0.7em;
+  font-weight: 500;
+  color: #484848;
+  padding-top: 0.8em;
+  padding-bottom: 0em;
+  padding-left: 0.25em;
+
+
+}
+
+
+
+/* ----------------------------------- */
+
+
+/* currnet month label */
 .month-indicator {
   color:#484848;
   text-align: center;
   font-weight: 750;
   letter-spacing: 0.0em;
+
+  display: grid;
+  grid-template-columns: 25fr 50fr 25fr;
+  align-items: center;
+  grid-auto-rows: 1fr;
+  
+  /* padding-top: 0.2em; */
 }
 
 /* // CSS grid used for the dates */
 .day-of-week,
 .date-grid {
+  /* display: inline-grid; */
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  /* grid-gap: 0.02em; */
+  /* //border: 1px black solid; */
 }
 
 /* // Styles for the weekday/weekend header */
@@ -47,6 +198,7 @@ main {
 }
 
 .day-of-week > * {
+  /* font-family: 'Montserrat'; */
   font-size: 0.65em;
   color: #757575;
   font-weight: 400;
@@ -66,12 +218,13 @@ main {
 /* // Style for each day */
 .date-grid button {
   position: relative;
-  /* border: 0.5px solid #767676; */
+  border: 1px solid #767676;
   border: 0;
   width: 4.7ch;
   height: 4.7ch;
   /* border-radius: 50%; */
-  background-color: transparent;
+  /* background-color: transparent; */
+  background-color: white;
   /* color:#484848; */
   font-size: 0.75em;
   font-weight: 700;
@@ -81,14 +234,14 @@ main {
 .date-grid button:focus {
   outline: none;
   background-color: #E4E7E7;
-  color: #757575;;
+  color: #484848;;
 }
 
-.date-grid button:active,
+/* .date-grid button:active,
 .date-grid button.is-selected {
-  /* background-color: var(--teal-600); */
+  --background-color: var(--teal-600); 
   color: white;
-}
+} */
 
 
 #clear-date-empty {
@@ -107,22 +260,109 @@ main {
   display: inline-block;
 }
 
-#month-container {
+/* #month-container {
   height: 1.3em;
-}
+} */
 
 #prev-button {
   float: left
 }
 
 #next-button {
-  float: right
+  justify-self: end;
 }
 
 .svg {
   border: 1px solid #E4E7E7;
   border-radius: 3px;
 
-  width: 2.2em;
+  width: 2.1em;
   height: 1.8em;
+}
+
+/* ----------------------------------- */
+
+#guest-container {
+  margin-top: 0.73em;
+}
+
+.guest-heading {
+  font-size: 0.75em;
+  color: #484848;
+  margin-bottom: 0.11em;
+
+}
+
+#guest {
+  padding: 0.2em;
+  border: 1px solid #E4E4E4;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 42fr 5fr;
+  border-radius: 0.1em;
+
+
+  /* change to 45.99px*/
+  height: 35.99px 
+
+}
+
+#guest-1 {
+  font-size: 0.9em;
+  font-family: 'Montserrat';
+  color: #484848;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 0.9em;
+  margin-right: 11.85em;
+
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+
+  margin-right: 13.65em;
+
+
+
+
+  /* //changee 0.5em*/
+  padding-left: 0em; 
+
+
+  background-color: #99EDE6;
+  border-radius: 0.2em;
+
+}
+
+.svg-up-down {
+  width: 1.8em;
+  height: 1.8em;
+  /* position: relative; */
+  bottom: 9%;
+}
+
+.border-bottom {
+  border-bottom: #238186 solid 2px;
+  margin-bottom: -4px;
+  position: absolute;
+}
+
+/* ----------------------------------- */
+
+#price-info-container {
+  margin-top: 1.01em;
+}
+
+#button-reserve {
+  background-color: #F8595F;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* //margin: auto; */
+
+
+  margin-top: 1.7em;
+  font-size: 0.92em;
+  height: 3.4em;
+  border-radius: 0.26em;
 }

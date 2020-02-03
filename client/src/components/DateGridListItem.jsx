@@ -4,20 +4,20 @@ class DateGridListItem extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log('color', this.props.hoverColor);
+        //console.log('color', this.props.hoverColor);
 
         this.state = {
-            day: this.props.day,
-            month: this.props.monthYear.month,
-            year: this.props.monthYear.year,
+            // day: this.props.day,
+            // month: this.props.monthYear.month,
+            // year: this.props.monthYear.year,
 
-            colorButtonDarkGreen: false,
-            hoverColor: false
+            // colorButtonDarkGreen: false,
+            // hoverColor: false
         };
 
         this.clickHandler = this.clickHandler.bind(this);
         this.firstGridColumn = this.firstGridColumn.bind(this);
-        this.changeColor = this.changeColor.bind(this);
+        //this.changeColor = this.changeColor.bind(this);
         this.hoverOver = this.hoverOver.bind(this);
     }
 
@@ -28,25 +28,31 @@ class DateGridListItem extends React.Component {
             return number.toString(); 
     }
 
-    hoverOver(dateTime) {
+    hoverOver(dateTime, avalibility) {
+        if(!avalibility)
+            return;
+
         // send just the hover item back ??
         this.props.mouseEnter(dateTime);
     }
 
-    clickHandler(dateTime) {
+    clickHandler(dateTime, avalibility) {
+        if(!avalibility)
+            return;
+
         console.log('ListItem', dateTime);
         this.props.updateStartEndDate(dateTime);
 
-        this.changeColor();
+        //this.changeColor();
         //console.log(event.target.dateTime);
         // need to save this later.
     }
 
-    changeColor() {
-        this.setState({
-            colorButtonDarkGreen: true
-        })
-    }
+    // changeColor() {
+    //     this.setState({
+    //         colorButtonDarkGreen: true
+    //     })
+    // }
 
     firstGridColumn(day) {
         if(day === 1){
@@ -55,6 +61,8 @@ class DateGridListItem extends React.Component {
         return null;
     } 
 
+
+    //D8D8D8
     render() {
         let month = this.prependZero(this.props.monthYear.month);
         let day = this.prependZero(this.props.day);
@@ -63,35 +71,40 @@ class DateGridListItem extends React.Component {
 
         let style = {};
         style['gridColumn'] = this.firstGridColumn(this.props.day);
-        if(this.state.colorButtonDarkGreen){
+
+        // starting day
+        if(this.props.start_end.startingDay && !this.props.monthYear.inSecondaryMonth){
             style['backgroundColor'] = '#00A699';
             style['color'] = 'white';
         }
 
         // hovering
-        if(!this.state.colorButtonDarkGreen && this.props.hoverColor){
+        // !this.props.start_end.startingDay && 
+        if(this.props.hoverColor){
             style['backgroundColor'] = '#A3F0EA';
             style['border'] = 'solid #80E8E0 0.3px';
             //style['border-color'] = 'black'
             style['color'] = 'white'; 
         }
-
-        if(!this.state.colorButtonDarkGreen && this.props.hoverColor
-            && this.props.lastFillDate){
+        
+        //!this.props.start_end.startingDay && 
+        if(this.props.hoverColor && this.props.existBothStartEnd){
             style['backgroundColor'] = '#00A699';
             style['border'] = '0';
             style['color'] = 'white';
         }
 
-
-
+        if(!this.props.avalibility){
+            style['color'] = '#D8D8D8';
+            style['textDecoration'] = 'line-through';
+        }
 
         return (
             // note come back to dateTime and ask a TA
             <button 
                 style={style}
-                onMouseEnter={() => {this.hoverOver(dateTime)}}
-                onClick={() => {this.clickHandler(dateTime)}}>
+                onMouseEnter={() => {this.hoverOver(dateTime, this.props.avalibility)}}
+                onClick={() => {this.clickHandler(dateTime, this.props.avalibility)}}>
                     <time dateTime={dateTime}>{this.props.day}</time>
             </button>
         );
