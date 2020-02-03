@@ -56,7 +56,7 @@ class CheckInOut extends React.Component {
         }
 
         return (
-            <div>
+            <div id="check-in-out-container">
                 <div className="date-heading">Dates</div>
                 <div className="check-in-out">
                     <div 

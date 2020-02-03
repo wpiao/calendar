@@ -7,6 +7,7 @@ import ClearDate  from './ClearDate.jsx';
 import CheckInOut from './CheckInOut.jsx';
 import PricePerNight from './PricePerNight.jsx';
 import Guest from './Guest.jsx';
+import PriceInformation from './PriceInformation.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -418,6 +419,32 @@ class App extends Component {
     });
   }
 
+  // ===== cccc ====
+  // make date from monthNumber year
+  //
+  makeDateFrMonthYear(monthNumber, year) {
+    // the date return will be <yyyy-mm-01>
+    let dateStr = year.toString() + "/" + monthNumber.toString() + "/01";
+    console.log("dateStr", dateStr);
+    var date0 = new Date(dateStr);
+    return date0;
+  }
+
+  makeDateFrDateStrMonth(DateStr) {
+    // string yyyy-mm-dd
+    //        012345678
+    // return date with yy-mm-01 for month compare
+
+    let startDate0M = DateStr.slice(5, 7);
+    let startDate0Y = DateStr.slice(0, 4);
+
+
+    let Date0Month = this.makeDateFrMonthYear(startDate0M, startDate0Y);
+
+    return Date0Month;
+  }
+  // ===== cccc ====
+
 
 
   render() {
@@ -433,6 +460,48 @@ class App extends Component {
     let listOfColorDates = this.colorDates();
     //let lastFillDate = Boolean(this.state.endDate) === true;
     let hide = Boolean(this.state.startDate);
+
+
+
+    // ===== cccc ====
+    var today = new Date().toISOString().split('T')[0];
+    let startDate0 = this.state.startDate ? this.state.startDate : today;
+    let endDate0 = this.state.endDate;
+    let u1 = this.state.avalibility;
+    let u2 = { ...this.state.avalibility };
+    let unavailSize = Object.keys(u2).length;
+
+    let Grid0Month = this.makeDateFrMonthYear(
+      this.state.monthNumber,
+      this.state.year
+    );
+
+    if (startDate0) {
+
+      // date object given a this.state.startDate
+      let startDate0Month = this.makeDateFrDateStrMonth(startDate0);
+      let startDateDay = Number(startDate0.slice(-2));
+
+      if (startDate0Month > Grid0Month) {
+
+        let i;
+        for (i = 0; i <= unavailSize; i++) {
+          u2[i] = false;
+        }
+      } else if (startDate0Month < Grid0Month) {
+        // do nothing...
+      } else {
+        console.log("startDate0Month == Grid0Month");
+        let i;
+        for (i = 0; i < startDateDay; i++) {
+          u2[i] = false;
+        }
+      }
+      console.log("u2", u2);
+    }
+
+    
+    // ===== cccc ====
 
     return (
     <main>
@@ -456,13 +525,15 @@ class App extends Component {
           mouseEnter={this.mouseEnter}
           listOfColorDates={listOfColorDates}
           //lastFillDate={lastFillDate} // sends T or F if there exist a last date
-          avalibility={this.state.avalibility}
+          avalibility={u2}
           />
         <ClearDate 
           hide={hide}
           clearState={this.clearState}/>
       </div>
       <Guest />
+      <PriceInformation status={status}/>
+      <div id='button-reserve'>Reserve</div>
     </main>
     );
   }
