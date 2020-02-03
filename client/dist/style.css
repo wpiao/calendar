@@ -17,7 +17,7 @@ body {
   background: white;
 }
 
-main {
+#calendar-app {
   max-width: max-content;
   margin: 3em auto 0 auto;
   padding: 1.4em;

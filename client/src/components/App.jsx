@@ -504,8 +504,7 @@ class App extends Component {
     // ===== cccc ====
 
     return (
-    <main>
-      
+    <div id="calendar-app">
       <PricePerNight />
       <CheckInOut 
         status={status} 
@@ -534,7 +533,7 @@ class App extends Component {
       <Guest />
       <PriceInformation status={status}/>
       <div id='button-reserve'>Reserve</div>
-    </main>
+    </div>
     );
   }
 }
