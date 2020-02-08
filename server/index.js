@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const db = require('./db');
+const cors = require('cors');
 
 // middleware:
 var morgan = require('morgan');
@@ -20,7 +21,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.listen(PORT, () => console.log('Listening on port: ' + PORT));
 
 
-app.get('/month', (req, res) => {
+app.get('/month', cors(), (req, res) => {
     
     //console.log('query', req.query);
     var params = req.query;
